@@ -95,10 +95,11 @@ In one file you can declare only one public class.
 
 -------------------------------
 JDK v/s JRE v/s JVM
+
 ----
-JDK	: Java Deveopment Kit
-JRE : Java Runtime Environment
-JVM : Java Virtual Machine
+	JDK	: Java Deveopment Kit
+	JRE : Java Runtime Environment
+	JVM : Java Virtual Machine
 ------------------------------------------------------------
 
 Source code(.java) -> javac -> Byte Code (.class) -> JVM -> m/c code -> o/p
