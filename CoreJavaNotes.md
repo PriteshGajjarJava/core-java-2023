@@ -62,6 +62,12 @@ C++ v/s Java
 | Scope	resolution operator(::)		| It doesn't exist 					|
 |									|									|
 | Destructor						| No destructor						|
+|									|									|
+| sizeof operator  					| No sizeof() operator as all types |
+									  are of fixed size					|
+
+
+
 
 -----------------------------------------------------------------------
 **main() function in Java:
@@ -105,8 +111,8 @@ JDK v/s JRE v/s JVM
 Source code(.java) -> javac -> Byte Code (.class) -> JVM -> m/c code -> o/p
 
 
-Byte code:
-	- Java compiler generates byte code on executing javac command.
+**Byte code:
+**	- Java compiler generates byte code on executing javac command.
 	- This code is platform/os independent.
 	- Bytecode helps to make Java programming language as Platform/OS independent.
 
@@ -114,8 +120,8 @@ Cross compilation
 WORA - Write Once Run anywhere 
 Program gets compiled on one m/c(one time), but it can run on any machine.
 
-Imp point about version:
-Program compiled with version "x", will run without any problem on versoin "x" and above. But it will not run on x-1 versions.
+**Imp point about version:
+**Program compiled with version "x", will run without any problem on versoin "x" and above. But it will not run on x-1 versions.
 e.g. Program compiled with java10 will work on java 10 and above, it will fail on java 9 or below versions.
 
 JVM is platfrom dependent: Because it takes care of converting a generic byte code into m/c code.
@@ -138,7 +144,7 @@ Is Bytecode consist of m/c code? -> NO
 Static block
 -----------------------------------------------------------------------
 - It is special block inside a class which is written using "static" keyword.
-e.g.
+e.g
 		static {
 			// code
 		}
@@ -267,29 +273,133 @@ e.g. If class is a public then constructor should be public.
 		}
 	}
 
+--------------------------------
+Stack v/s Heap Memory
+-----------------------------------------------------------------------
+- When we run any java program, JVM allocates both stack and heap memory for that java process.
+
+**Stack**
+	- All function calls are stored in Stack.
+	- For each function call stack frame is created
+	- Local variables of functions are stored in a stack.
+
+**Heap memory:
+**	- When we create object of a class using "new" operator, object gets created in Heap memory.
+	- Objects created in heap memory are cleaned up by Garbage collection process. 
+
+Example:
+	class A {
+		public static void main(String[] args) {
+			int x = 10;
+			A obj = new A();
+			f1();
+		}
+		
+		static void f1() {
+			int y = 20;
+		}
+	}
+	
+	
+	| y = 20  |	
+f1()|_ _ _ _ _|				 |	_____	 |	
+	|         |				 |	|___|	 | 
+main|obj=2000x|-----------------2000x    | 	
+	|_x = 10 _| 			 |___________|	
+	 
+	 Stack					   Heap
+
+--------------------------------
+Pass by mechanism
+-----------------------------------------------------------------------
+Java uses "Pass By Value" mechanism for function parameters.
+
+For primitive types it will be normal value, however for references value will be an address.
 
 
+--------------------------------
+reference v/s object
+-----------------------------------------------------------------------
+- Reference is a local variable which is stored in a stack.
+- It acts a pointer
+- Reference points to an object which is created in heap memory.
+- Multiple references can points to single object.
+
+**Reference count:**
+- Reference count is a count of references pointing to an object.
+- Every object has a reference count. 
+- Garbage collection will delete an object from heap memory, only if reference count is 0.
+
+Student s1 = new Student();
+Student s2 = new Student();
+Student s3; // null
+
+ In above code, there are 3 references and 2 objects.
+
+--------------------------------
+Primitive types (in-built data typs)
+-----------------------------------------------------------------------
+There are total 8 primitive types in Java.
+
+	|**Data Type**  |	** Size** |** Wrapper class** | Default value
+	|byte			|	1 byte	  | Byte			  | 0
+	|short			|	2 bytes	  | Short			  | 0	
+	|int			|	4 bytes	  | Integer			  | 0
+	|long			|	8 bytes	  | Long			  |	0
+	|char			|	2 bytes	  | Character		  | '' 	
+	|float			|	4 bytes	  | Float			  | 0.0
+	|double			|	8 bytes	  | Double			  | 0.0
+	|boolean		|	1 bit	  | Boolean			  | false	
+
+There is no "unsigned" type in Java. As its there in C/C++ for storing address of variable(pointer).
+Each data type in Java has corrosponding wrapper class.
+
+Boxing: Conversion from primitive data type to wrapper calss is called as "Boxing".
+
+Auto Boxing: Compiler does this conversion wherever required from primtive type to wrapper type.
+e.g.
+
+	List<Integer> list = new ArrayList<Integer>();
+	list.add(3); // Here 3 gets converted into Integer object (Integer.valueOf(3))
+
+String is not a data type, it is class from java.lang package.
+
+**Typecasting: 
+**
+Mechanism of converting one data type into another type.
+
+We can assign value of small data type to bigger data type.
+e.g. 	we can assign int to long but not vice versa.
+
+To assign bigger data type to smaller type we can use explicit Type-casting.
+
+	class TypeCasting {
+		public static void main(String[] args) {
+			int x = 10;
+			long l = x; // implicit
+			System.out.println(l);
+
+			long y = 40;
+			int z = (int)y;// explicit type casting
+		}
+	}
+**
+Why char in Java is of 2 bytes?**
+As Java supports UTF-8/mulilangual characters, char size is 2 bytes.
+In other languages characters are of ASCII format.
 
 
+1 byte range: 
+1 byte = 8 bits (n=8)
 
+-2 ^ n-1  to +2^n-1 -1
+-128 to 127
 
+12 0000 1110
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Decimal to Binary : Integer.toBinaryString(num)
+Decimal to Octal  : Integer.toOctalString(num)
+Decimal to Hex 	  : Integer.toHexString(num)
 
 	
 	
