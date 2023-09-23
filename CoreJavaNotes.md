@@ -1,5 +1,5 @@
-**Core Java Notes**
-
+										**Core Java Notes**
+										
 - 	OOP language
 - 	Latest version is v20
 - 	Used for Desktop, mobile, web application development
@@ -31,49 +31,31 @@ Run/Execute:
 --------------------------------
 C++ v/s Java
 -----------------------------------------------------------------------
-
-| C++		      					| Java 								|
-| ----------- 						| ----------- 						|
-| We can write prog     			| Writing class is mandatory		|
-| without class.      				|									|
-|    								| 									|
-| class declaration ends with (;)	| Not applicable					|
-|									|									|
-| return type not mandatory for		| Return type for function is		|
-| function.							| mandatory.						|
-|									|									|
-| C++ is platfom depdenent			| Platform independent				|
-|									|									|
-| Pointers are allowed				| No pointers						|
-|									|									|
-| "delete" operator is there to     | No delete opertor					|
-| delete an object.					|									|
-|									|									|
-| namespace							| package							|
-|									|									|
-| friend function 					| No friend function				|
-|									|									|
-| copy constructor			   		| No copy constructor				|
-|									|									|
-| multiple inheritance with calsses | multiple inheritance with interfaces|
-|									|									|
-| virtual functions					|All functions are virtual. 		|
-|									|									|
-| Scope	resolution operator(::)		| It doesn't exist 					|
-|									|									|
-| Destructor						| No destructor						|
-|									|									|
-| sizeof operator  					| No sizeof() operator as all types |
-									  are of fixed size					|
+|C++								| Java |
+|--|--|
+|We can write program without class  | Class/interface/enum is mandatory  |
+|Class ends with semicolon  		 |	Not applicable  |
+|Return type is not mandatory in function  |	Return type is mandatory  |
+|Platform Dependent  		 |	Platform independent  |
+|pointers are allowed  		 |	pointers are not allowed  |
+|delete operator for deletion  		 |	No delete operator. Garbage collection helps.  |
+|destructor  		 |	No destructor  |
+|namespace  		 |	package  |
+|Multiple inheritance with classes  		 |	Multiple inheritance with interfaces  |
+|Friend function  		 |	No Friend function  |
+|Copy constructor  		 |	No copy constructor  |
+|virtual functions allowed  		 |	no virtual functions  |
+|scope resolution (::)  		 |	no scope resolution  |
+|sizeof() operator allowed  		 |	no sizeof() operator  |
 
 
 
 
 -----------------------------------------------------------------------
-**main() function in Java:
-**- It is entry point function
+**main() function in Java:**
+- It is entry point function
 - syntax:
-	*public static void main(String[] args)*
+		`public static void main(String[] args)`
 - Who calls main() function? -> JVM
 - main() function is public because external entity JVM invokes main() function.
 - It is static because JVM can call main() without creating an object.
@@ -84,18 +66,16 @@ C++ v/s Java
 - Another syntax of main:
 	public static void main(String ...args){} // main using var-arg
 -----------------------------------------------------------------------
-
 File-name and class name rule:
-
 -----------------------------
 File name MUST be same as class name ONLY when class is "public" class.
 
 e.g.
 A.java
-class Hello {} // valid
+`class Hello {} // valid`
 
 A.java
-public class Hello {} // error
+`public class Hello {} // error`
 
 In one file you can declare only one public class.
 
@@ -110,9 +90,8 @@ JDK v/s JRE v/s JVM
 
 Source code(.java) -> javac -> Byte Code (.class) -> JVM -> m/c code -> o/p
 
-
-**Byte code:
-**	- Java compiler generates byte code on executing javac command.
+**Byte code:**
+     - Java compiler generates byte code on executing javac command.
 	- This code is platform/os independent.
 	- Bytecode helps to make Java programming language as Platform/OS independent.
 
@@ -120,8 +99,8 @@ Cross compilation
 WORA - Write Once Run anywhere 
 Program gets compiled on one m/c(one time), but it can run on any machine.
 
-**Imp point about version:
-**Program compiled with version "x", will run without any problem on versoin "x" and above. But it will not run on x-1 versions.
+***Imp point about version:***
+Program compiled with version "x", will run without any problem on versoin "x" and above. But it will not run on x-1 versions.
 e.g. Program compiled with java10 will work on java 10 and above, it will fail on java 9 or below versions.
 
 JVM is platfrom dependent: Because it takes care of converting a generic byte code into m/c code.
@@ -219,24 +198,24 @@ What is an object?
 - Object is an instance of a class.
 - To create object of a class we use "new" operator.
 e.g.
-	Employee e = new Employee();
-	Person p = new Person("James", 2001-9-8, 49); // name, birthDate, weight
+	`Employee e = new Employee();`
+	`Person p = new Person("James", 2001-9-8, 49); // name, birthDate, weight`
 
 -----------------------------------------------------------------------
 Types of relationship?
 -----------------------------------------------------------------------
-a) IA-A relationship (Inheritance)
+a) IS-A relationship (Inheritance)
 b) HAS-A relationsip (Association/Composition/Aggregation)
 composition is stronger than Aggregation
 
 Inheritance example: (______)
-Employee IS-A Person
-Student IS-A Person
+- Employee IS-A Person
+- Student IS-A Person
 
 Composition example: (--------)
-Car HAS-A Engine - Composition (Strong relationship)
-Person HAS-A Address (Aggregation)
-College HAS-A Departments
+- Car HAS-A Engine - Composition (Strong relationship)
+- Person HAS-A Address (Aggregation)
+- College HAS-A Departments
 
 --------------------------------
 Constructor
@@ -288,26 +267,22 @@ Stack v/s Heap Memory
 	- Objects created in heap memory are cleaned up by Garbage collection process. 
 
 Example:
-	class A {
-		public static void main(String[] args) {
-			int x = 10;
-			A obj = new A();
-			f1();
-		}
-		
-		static void f1() {
-			int y = 20;
-		}
-	}
-	
-	
-	| y = 20  |	
-f1()|_ _ _ _ _|				 |	_____	 |	
-	|         |				 |	|___|	 | 
-main|obj=2000x|-----------------2000x    | 	
-	|_x = 10 _| 			 |___________|	
-	 
-	 Stack					   Heap
+
+    class A {
+    		public static void main(String[] args) {
+    			int x = 10;
+    			A obj = new A();
+    			f1();
+    		}
+    		
+    		static void f1() {
+    			int y = 20;
+    		}
+    	}	
+On stack: 
+		| 		x=10			 				  	|
+		|		obj = memory-address	|
+	    |-------------------------------  |
 
 --------------------------------
 Pass by mechanism
@@ -330,10 +305,9 @@ reference v/s object
 - Every object has a reference count. 
 - Garbage collection will delete an object from heap memory, only if reference count is 0.
 
-Student s1 = new Student();
+`Student s1 = new Student();
 Student s2 = new Student();
-Student s3; // null
-
+Student s3; // null``
  In above code, there are 3 references and 2 objects.
 
 --------------------------------
@@ -352,11 +326,11 @@ There are total 8 primitive types in Java.
 	|boolean		|	1 bit	  | Boolean			  | false	
 
 There is no "unsigned" type in Java. As its there in C/C++ for storing address of variable(pointer).
-Each data type in Java has corrosponding wrapper class.
+Each data type in Java has corresponding wrapper class.
 
-Boxing: Conversion from primitive data type to wrapper calss is called as "Boxing".
+Boxing: Conversion from primitive data type to wrapper class is called as "Boxing".
 
-Auto Boxing: Compiler does this conversion wherever required from primtive type to wrapper type.
+Auto Boxing: Compiler does this conversion wherever required from primitive type to wrapper type.
 e.g.
 
 	List<Integer> list = new ArrayList<Integer>();
@@ -383,8 +357,7 @@ To assign bigger data type to smaller type we can use explicit Type-casting.
 			int z = (int)y;// explicit type casting
 		}
 	}
-**
-Why char in Java is of 2 bytes?**
+**Why char in Java is of 2 bytes?**
 As Java supports UTF-8/mulilangual characters, char size is 2 bytes.
 In other languages characters are of ASCII format.
 
@@ -405,7 +378,7 @@ Decimal to Hex 	  : Integer.toHexString(num)
 Array
 -----------------------------------------------------------------------
 
-- Array is a data structure in which you can store multiple elmements of same type.
+- Array is a data structure in which you can store multiple elements of same type.
 - It is static type. Once you create an array you can not increase it's size or decrease it's size(size is fixed)
 - It is index based data structure.
 - Array elements are accessed using "index". (index always starts from 0)
@@ -439,17 +412,25 @@ Actual array is stored in heap memory.
 To print array data directly we can using following.
 	
 	java.util.Arrays.toString(arr);
+
+Streams: 
+
+- Supported from Java-8
+- Any collection can be converted into Stream and then set of functions filter(), map(), reduce() can be applied.
+
+To convert array into stream:
+	`Arrays.stream(arr)`
+
+Ex. of map( )	
+
+    int[] arr = {1,2,3,4};
+    int[] res = Arrays.stream(arr).map(e -> e * e).toArray( ); // [1, 4, 9, 16]
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+Ex. of filter( )	
+
+    int[] arr = {1,2,3,4};
+    int[] evenElements = Arrays.stream(arr).filter(e -> e%2 == 0).toArray( ); // [2,4]
+Ex. of reduce( )	
+
+    int[] arr = {1,2,3,4};
+    int sum = Arrays.stream(arr).reduce(0, (a,b) -> a+b).toArray(); // 10
