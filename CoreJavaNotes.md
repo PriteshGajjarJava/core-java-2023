@@ -401,6 +401,46 @@ Decimal to Binary : Integer.toBinaryString(num)
 Decimal to Octal  : Integer.toOctalString(num)
 Decimal to Hex 	  : Integer.toHexString(num)
 
+--------------------------------
+Array
+-----------------------------------------------------------------------
+
+- Array is a data structure in which you can store multiple elmements of same type.
+- It is static type. Once you create an array you can not increase it's size or decrease it's size(size is fixed)
+- It is index based data structure.
+- Array elements are accessed using "index". (index always starts from 0)
+- Array length can be calcuated using property "length". (e.g. arr.length)
+
+How to create an array?
+	int[] a = new int[5];
+	String cities[] = new String[10];
+	Student[] studentArr = new Student[100];
+	int[] a = {11,12,13};
+	String[] directions = {"North", "South", "East", "West"};
+	
+	System.out.println(cities.length); //10
+	
+	// Traversing using standard for loop
+	int[] arr = {11,12,13,14,15};
+	for (int i = 0; i < arr.length; i++) {
+		Sop(arr[i]);
+	}
+	
+	For-Each loop:
+	for (int element : arr) {
+		sop(element);
+	}
+	
+	for (Student s : studentArr) {}
+	
+Array reference is stored in stack.
+Actual array is stored in heap memory.
+
+To print array data directly we can using following.
+	
+	java.util.Arrays.toString(arr);
+	
+	
 	
 	
 	
