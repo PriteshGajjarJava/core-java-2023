@@ -47,7 +47,7 @@ C++ v/s Java
 |virtual functions allowed  		 |	no virtual functions  |
 |scope resolution (::)  		 |	no scope resolution  |
 |sizeof() operator allowed  		 |	no sizeof() operator  |
-
+|Operator overloading is there  		 |	No operator overloading  |
 
 
 
@@ -385,6 +385,7 @@ Array
 - Array length can be calcuated using property "length". (e.g. arr.length)
 
 How to create an array?
+
 	int[] a = new int[5];
 	String cities[] = new String[10];
 	Student[] studentArr = new Student[100];
@@ -434,3 +435,106 @@ Ex. of reduce( )
 
     int[] arr = {1,2,3,4};
     int sum = Arrays.stream(arr).reduce(0, (a,b) -> a+b).toArray(); // 10
+	
+	
+--------------------------------
+Var-arg list
+-----------------------------------------------------------------------
+	
+ - We can decalre var arg list parameters using ... (ellipse) operator
+ - It is used when we have to accept same type of elements but number we don't know
+ - In one function we can have only one var-arg parameter.
+ - It has to be last parameter in the function declartion.
+ - Internally it gets converted into an Array.
+ 
+--------------------------------
+Polymorphism
+-----------------------------------------------------------------------
+
+- It is OOP concept.
+- One name many forms.
+- There are two types of polymorphism in Java.
+	a) Compile time polymorphism - Method Overloading
+	b) Run-time polymorphism - Method Overriding
+
+**Method Overloading**
+
+- Same method name, change in parameters.
+- Change in parameters can be one of the following.
+	a) Count of parameters
+	b) Types of parameters
+	c) Sequence of parameters
+- Using method overloading we can define multiple methods in one class with same name but changes in parameters.
+- This is compile-time polymorphism, because which overloaded method to be called that decision is taken at compile time.
+- Method overloading does NOT depends on return type.
+- We can overload constructors, instance/static methods.
+
+**Example:**
+	
+	class Demo {
+		int add(int a, int b) { }
+		int add(int a, int b, int c) { } // change in count compared to above one
+		float add (int a, float b) {}
+		float add (float a, int b) {} // change in sequence compared to above one
+		String add (String a, String b) { } // change in type compared to 1st one
+		
+		double add(int a, int b) {} // ERROR- conflicting with 1st method. 
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
