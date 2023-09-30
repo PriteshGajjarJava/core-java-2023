@@ -484,25 +484,121 @@ Polymorphism
 	
 	
 	
+--------------------------------
+	String
+-----------------------------------------------------------------------
+		
+	- Collection of chracters (Array of characters)
+	- String is a class from java.lang package. (It's not a data type)
+	- String objects are immutable.
+	- Following are ways to create String using Java.
+
+	String s1 = "Java";
+	String s2 = new String("Java");
 	
 	
+	- String created by assigning string literal directly (without new operator) goes in special area in Heap
+	memory which is called as "String Literal Pool".
+	- JVM always checks if string literal already exists, if yes then no new entry added in a pool.
+	- Using String literal pool memory is saved (As we are not creating duplicate entries).
 	
+	String object is immutable:
+	Any change performed on string value does NOT change original value, instead changes happen in new memory.
+	This is called as immutability.
 	
+	All string functions which updates string value (e.g. toUpperCase()) returns new string.
 	
+	**String Functions:**
 	
+	- Case converstion : toUpperCase(), toLowerCase()
+	- concat() : 
+		String s1 ="abc";
+		String s2 = "pqr";
+		String s3 = s1 + s2;
+		or
+		String s3 = s1.concat(s2);
+	- length()
+		String s1 = "program";
+		s1.length(); //7
+	- charAt(index)
+		String s1 = "I am java developer";
+		s1.charAt(10);// 'd'
+	- searching: 
+		indexOf(char)
+		indexOf(string)
+		String s1 = "We are learning Java";
+		s1.indexOf('n');//11
+		s1.lastIndexOf('n');//13
+		s1.indexOf("learn");// 7
+		s1.indexOf('z'); // -1
+		
+		boolean startsWith(string)
+		String s1  = "This is rainy season";
+		s1.startsWith("This"); // true
+		s1.endsWith("season");//true
+		s1.startWith("We");// false
+
+		boolean contains(string);
+		String s1  = "This is rainy season";
+		s1.contains("eas");// true
+		
+	- Trimming:
+		String s1 = "    abc   ";
+		s1.trim();//abc
+		String s2 = "  abc        pqr   ";
+		s2.trim();//abc        pqr
+	- substring:
+		String s1 = "I am java developer";
+		s1.substring(5);//java developer
+		s1.substring(5,9);//java
+		
+	- replace
+		String s1 = "We are Java developer";
+		s1.replace('a', '@');
+		s1.replace("are", "will be")
+		
+	- Comparision
+		== operator (Not preferred)
+		equals() 
 	
+		String s1 = "Java";
+		String s2 = new String("Java");
+		String s3 = "Java";
+		
+		Sop(s1 == s2); // false
+		Sop(s1 == s3); // true
+		
+		Sop(s1.equals(s2));// true
+		Sop(s1.equals(s3));// true
 	
+		String s1 = "Java";
+		String s2 = "JAVA";
+		s1.equals(s2);// false
+		s1.equalsIgnoreCase(s2); // true
+		
+	- String break and join
 	
+		String s = "This is a macbook";
+		String[] words = s.split(" "); // ["This", "is", "a", "macbook"]
+		
+		String s = String.join(" ", words);// "This is a macbook"
 	
+	- Converting String into char array.
+		toCharArray()
+		
+		String s1 = "Java";
+		char[] arr = s1.toCharArray(); // ['J','a','v','a']
+		
+		Array to String:
+		char[] arr = {'J','a','v','a'};
+		String s = new String(arr);// Array to String -> "Java"
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	- valueOf()
+		int i = 10;
+		String s = String.valueOf(i); "10"
+		
+		boolean b = true;
+		String s = String.valueOf(b);//"true"
 	
 	
 	
