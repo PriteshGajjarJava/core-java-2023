@@ -647,16 +647,134 @@ Overriding equals() method of Object class
 	}
 
 	
+-------------------------------------
+Inheritance
+--------------------------
+
+	- OOP concept.
+	- Inheritance is a relationship (IS-A) between parent and child class.
+	- We achieve "Reusability" using inheritance
+	- Using inheritance a child class can share properties and functions from parent class.
+	- "extends" is a keyword used to rerpresent this relationship.
+
+	Example:
+	
+		class Person {
+		  String name;
+		  Date birthDate;
+		  float height, weight;
+		  char gender;
+		  
+		  void run () { ... }
+		  void talk () { ... }
+		  void walk () { ... }
+		  void learn () { ... }
+		  void eat () { ... }
+		  void sleep () { ... }
+		}
+	
+		class Employee extends Person {
+			// It can reuse all properties from Person class + it can have it's own properties
+			int empId;
+			float salary;
+			String companyName;
+			
+			calculateSalary() {
+			
+			}
+		}
+	
+**Types of Inheritance:**	
+	1) Single level inheritance
+		
+		class A {}
+		class B extends A {}  
+		
+			A
+			|
+			|
+			B
+	2) Multilevel inheritance
+			
+			A
+			|
+			B
+			|
+			C
+		class A {}
+		class B extends A {}
+		class C extends B {}
+	3) Hierarchical Inheritance
+			
+			A
+		
+		B		C
+	
+	D		E
+	
+		class A {}
+		class B extends A {}
+		class C extends A {}
+		class D extends B {}
+		class E extends B {}
+	
+**NOTE:**
+Multiple Inheritance is NOT possible with classes in Java, but it is possible with interfaces.
+
+		B    C
+		
+		  A
+		  
+		class A extends B, C => ERROR (we can extend only one class at a time)
+		
+		
+		interface A  	interface B
+		
+				class C implements A,B -> Allowed
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+**Constructor chaining:**
+When we create object of child class first constructor of parent classes gets called from top to botton, this is called as constructor chaining.
+
+e.g. class A {}
+	 class B extends A {}
+	 class C extends B {}
+
+For C obj = new C(); // Constructors will be called in oder: Object -> A -> B -> C
+
+This constructor chaining is achieved using "super" keyword.
+
+**super keyword:**
+
+"super" keyword is used for following:
+1) To call constructor of parent class.
+	e.g.
+			super(); // To call default constructor of parent class
+			super(1,3);// parameterised constructor of parent class
+			
+2) We can access parent class property using "super"
+
+		class Person {
+			String name;
+		}
+		class Emp extends Person {
+			fun() {
+				String name = super.name; // This refers to "name" property from parent class
+			}
+		}
+
+3) To call parent class functions "super" is used.
+		
+		class A {
+			void fun() {}
+		}
+		class B {
+			void xyz() {
+				super.fun(); // Calling parent class fun() method.
+			}
+		}
+
+
 	
 	
 	
