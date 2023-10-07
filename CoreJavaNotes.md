@@ -447,42 +447,6 @@ Var-arg list
  - It has to be last parameter in the function declartion.
  - Internally it gets converted into an Array.
  
---------------------------------
-Polymorphism
------------------------------------------------------------------------
-
-- It is OOP concept.
-- One name many forms.
-- There are two types of polymorphism in Java.
-	a) Compile time polymorphism - Method Overloading
-	b) Run-time polymorphism - Method Overriding
-
-**Method Overloading**
-
-- Same method name, change in parameters.
-- Change in parameters can be one of the following.
-	a) Count of parameters
-	b) Types of parameters
-	c) Sequence of parameters
-- Using method overloading we can define multiple methods in one class with same name but changes in parameters.
-- This is compile-time polymorphism, because which overloaded method to be called that decision is taken at compile time.
-- Method overloading does NOT depends on return type.
-- We can overload constructors, instance/static methods.
-
-**Example:**
-	
-	class Demo {
-		int add(int a, int b) { }
-		int add(int a, int b, int c) { } // change in count compared to above one
-		float add (int a, float b) {}
-		float add (float a, int b) {} // change in sequence compared to above one
-		String add (String a, String b) { } // change in type compared to 1st one
-		
-		double add(int a, int b) {} // ERROR- conflicting with 1st method. 
-	}
-	
-	
-	
 	
 --------------------------------
 	String
@@ -775,11 +739,196 @@ This constructor chaining is achieved using "super" keyword.
 		}
 
 
+--------------------------------
+Polymorphism
+-----------------------------------------------------------------------
+
+- It is OOP concept.
+- One name many forms.
+- There are two types of polymorphism in Java.
+	a) Compile time polymorphism - Method Overloading
+	b) Run-time polymorphism - Method Overriding
+
+**Method Overloading**
+
+- Same method name, change in parameters.
+- Change in parameters can be one of the following.
+	a) Count of parameters
+	b) Types of parameters
+	c) Sequence of parameters
+- Using method overloading we can define multiple methods in one class with same name but changes in parameters.
+- This is compile-time polymorphism, because which overloaded method to be called that decision is taken at compile time.
+- Method overloading does NOT depends on return type.
+- We can overload constructors, instance/static methods.
+
+**Example:**
 	
+	class Demo {
+		int add(int a, int b) { }
+		int add(int a, int b, int c) { } // change in count compared to above one
+		float add (int a, float b) {}
+		float add (float a, int b) {} // change in sequence compared to above one
+		String add (String a, String b) { } // change in type compared to 1st one
+		
+		double add(int a, int b) {} // ERROR- conflicting with 1st method. 
+	}
 	
+-----------------------	
+Method Overriding	
+-----------------------
+
+- Method overriding is "Runtime Polymorphism".
+- In inheritance a child class can provide new definition for parent class method using overriding.
+- Method overriding means writing parent class method with same signature in child class.
+- This is useful when child class does NOT like the parent class method implementation and hence child class is providing new implementation.
+- Function name has to be same. Paramerters has to be of same type, same order. Return type has to be same.
+- What about access specifier of overridden method?
+	- We can change the access specififer. Rule is we can increase the scope but we can not decrease the scope.
+		*public -> protected -> default -> private* (Access specifiers order from most friendly to less friendly.)
+		If method is default in parent class child class can rewrite that method with default/protected/public.
+- If parent class has "throws" in method signature with exception class then child class has 3 options.
+	1) Keep same exception with throws
+	2) Change exception to sub-class
+	3) Skip "throws"
+- There are few methods which can NOT be overridden.
+	1) private methods
+	2) static methods
+	3) final methods
+	4) constructor
+- Writing same method signature is one of the criteria, but runtime polymorphism must exists for overridden method.  
+
+What is Runtime Polymorphism?
+	When method is overridden, which method to be invoked (parent/child) this decision is taken at runtime based on which type of object is created at run-time.
 	
+Example:
 	
+	class A {
+		void fun() { SOP("A:fun"); }
+	}
+	class B extends A {
+		void fun() { SOP("B:fun");}
+	}
 	
+	A obj1 = new A();
+	obj1.fun(); // A:fun
+
+	B obj2 = new B();
+	obj2.fun(); // B:fun
+
+	A obj3 = new B();
+	obj3.fun(); // B:fun ****** This is Runtime polymorphism ****** 
+	
+Can parent class mandate child class to override specific method? 
+YES. Parent can declare method as "abstract".
+	e.g.	
+		abstract void fun(); 
+
+**Upcasting**
+We can assign object of child class to a parent class. (We can go UP in the hierarchy.)
+
+class A {}
+class B extends A {}
+
+A obj = new B(); //object of child to parent type - allowed : Upcasting
+B obj = new A(); //object of parent can NOT be assigned to child class. - Downcasting
+Object obj = new A(); // valid
+Object obj = new B(); // valid
+
+We can forcefully convert object of parent to a child using explicit typecasting.
+
+---------------------
+Abstract class
+----------------------------------------
+
+**Abstract method:**
+	- Abstract method is a method which only have signature and NO definition.
+	- It ends with semicolon.
+	- We can write these methods only in Abstract class.
+	- It's mandatory for child class to override abstract method.
+	
+	e.g. public abstract void f1();
+
+**Abstract class**
+	- It is a class written with "abstract" keyword.
+	- Generally abstract class would have abstract methods. However we can declare abstract class without any abstract methods.
+	- We can NOT directly create object of abstract class.
+	- We can have constructor in abstract class which gets invoked when we create child class.
+	- Abstract class can consist of both abstract and non-abstract methods.
+	- Child class which inherits abstract class MUST override all abstract methods from parent class. 
+	- If child class skip writing any abstract method from parent class, then child class also need to be declared as abstract class.
+	
+
+		abstract class A {
+			A() { System.out.println("A"); }
+			abstract void f1();
+			void f2() {
+				...
+			}
+		}
+		class B extends A {
+			B() { System.out.println("B"); }
+			void f1() { ... }
+		}
+		
+		A obj = new A(); // ERROR- We can not create object of abstract class.
+		A obj = new B(); // Constrcuctor of A will be called and then B
+
+----------------
+Interface
+----------------
+
+- Interface is a type in java like class/enum.
+- It is used to define contract. (What all things class must write?)
+- An interface can consist of properties and functions.
+- All properties of interfaces are static and final(constant).
+- All methods of interfaces are "public abstract".
+- We can NOT create object of interface type.
+- We can NOT have constructor in interface.
+- One interface can inherit another interface using "extends" keyword.
+- One class can inherit another interface using "implements" keyword.
+- Multiple inheritance with interfaces is possible. One class can inherit more than one interfaces using "implements".
+e.g
+		interface X {}
+		interface Y {}
+		class A implements X, Y {} // Multiple inheritance.
+		
+- With Java 8 interface can also have default methods.
+	e.g.	default void f() { ... }
+- A child class which inherits an interface MUST override all abstract methods from interface.
+- If child class fails to override any of interface abstract method, then child class can be declared as 'abstract' class.
+- Example of interfaces from JDK : Runnable, Cloneable, Serializable, Map, List, Set etc.
+
+**Marker/Tagged Interfaces**
+There are few in-built interfaces in Java which does NOT have any abstract method. They are used to tag some feature.
+e.g. Serializable, Cloneable
+Usiing these interfaces we give some special instructions to JVM.
+	
+	class Emp {}
+	Emp e = new Emp();
+	e.clone(); // Error "Emp is not Cloneable"
+	
+	Solution:
+		class Emp implements Cloneable { } // By writing this we are telling JVM that allow cloning on Emp objects.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	
 	
