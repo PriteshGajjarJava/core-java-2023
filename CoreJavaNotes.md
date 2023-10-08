@@ -945,6 +945,71 @@ There are 4 access specifiers.
 - public : Accessible **everywhere**
 
 
+-----------------
+Exception Handling
+-------------------
+
+What is Exception?
+ Exception is runtime error which causes program to terminate.
+ 
+- Whenever exception occurs JVM creates object of particular exception and terminate the program execution.
+e.g. If there are 10 lines in code and exception comes on 3rd line and it is not handled program will be 
+terminated without executing last 7 lines.
+
+**Exception Handling:**
+It is mechanism of handling an exception and continuing program execution.
+
+Exceptions can be handled using "try-catch" block.
+
+1) try block:
+	- Its a block in which we can write code which can cause an exception.
+	- In one funciton we can write multiple "try" blocks.
+	- Try to write minimal code in one try block.
+	- If we write 5 lines in "try" block and 3rd line causes an exception then control will go to "catch" block and 4th and 5th lines are skipped.
+	- "try" block must be followed by catch and/or finally block.
+	
+2) catch block:
+	- Actual exception handler block.
+	- Whenever exception occurs in try block, JVM looks for matching 'catch' block and jumps to it.
+	- One 'try' can have multiple 'catch' blocks. Only one of them would get executed if exception occurs.
+	- If matching 'catch' is not found then program will be terminated.
+	- 'catch' block will NOT be executed if exception does NOT occur.
+	
+3) finally block
+	- Optional block can be written with "try".
+	- This is special block which gets executed in both cases a) exception occurs b) No exception.
+	- Genearlly cleanup code is written in this block. e.g. DB close connection, closing socket.
+	- If System.exit(0) is encountered before reaching finally block, then finally will NOT be executed.
+	
+4) "throw" keyword:
+	- It is used to throw an exception.
+	- Whenever exception occurs JVM creates object of particular exception and then use "throw" keyword to throw that exception.
+		e.g. NullPointerException e = new NullPointerException();
+			 throw e;
+
+5) "throws" keyword:
+	- Used with method signature.
+	- Syntax: throws <Exception-class-name1>, <Exception-class-name2> ...
+	- This keyword tells consumer of function that there is possiblility of coming exceptions mentioned with "throws". (It's kind of warning)
+	- Compiler would mandate to handle exception mentioned with "throws", if those exceptions are "Checked" exceptions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
