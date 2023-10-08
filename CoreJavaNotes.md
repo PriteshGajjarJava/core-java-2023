@@ -911,9 +911,38 @@ Usiing these interfaces we give some special instructions to JVM.
 		class Emp implements Cloneable { } // By writing this we are telling JVM that allow cloning on Emp objects.
 
 
+-----------------
+Package
+-------------------
 
+- Package is methodology using which we can organize our classes.
+- We achieve following by using "package"
+	a) Modularity
+	b) Seperating code based on their functionality
+	c) We define boundry for our classes. e.g. A class with "default" scope can be accessed only withing same package.
+- "package" is a keyword which we can use to tell JVM that our class belongs to particular package.
+- package name can be of one/two/three..n words seperated by dot(.)
+		e.g. com.pga
+			 com.pga.maths
+			 maths
+- "package" declaration MUST be first line in a program.
+- "import" keyword is used to import classes from another package.
+- Java also organises it's classes under different packages.
+	e.g. java.lang, java.io, java.util, java.sql, javax.swing. java.awt, java.text, java.net, java.math
+- Package is just a folder structure.
+		e.g. com.pga.A; -> class A will be created under folder /com/pga
+- "default" access specifier is called as Package level scope. Anything with default access specifier is accessed within same package.
 
+-----------------
+Access specifiers
+-------------------
 
+There are 4 access specifiers.
+
+- private : Accessible only within **same class**
+- default : Accessible within **same package**
+- protected : Accessible **outside package with help of inheritance** (subclass)
+- public : Accessible **everywhere**
 
 
 
