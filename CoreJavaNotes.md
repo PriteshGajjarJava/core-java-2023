@@ -964,21 +964,23 @@ Exceptions can be handled using "try-catch" block.
 1) try block:
 	- Its a block in which we can write code which can cause an exception.
 	- In one funciton we can write multiple "try" blocks.
-	- Try to write minimal code in one try block.
+	- It's good practice to write minimal code in one "try" block.
 	- If we write 5 lines in "try" block and 3rd line causes an exception then control will go to "catch" block and 4th and 5th lines are skipped.
 	- "try" block must be followed by catch and/or finally block.
 	
 2) catch block:
 	- Actual exception handler block.
-	- Whenever exception occurs in try block, JVM looks for matching 'catch' block and jumps to it.
+	- Whenever exception occurs in "try" block, JVM looks for matching 'catch' block and jumps to it.
 	- One 'try' can have multiple 'catch' blocks. Only one of them would get executed if exception occurs.
 	- If matching 'catch' is not found then program will be terminated.
 	- 'catch' block will NOT be executed if exception does NOT occur.
+	- When we write multiple catch blocks, order of catch block MUST be from child to parent. e.g If we have to write 3 catch blocks with Exception, Throwable, RuntimeException then order will be 
+		RuntimeException -> Exception -> Throwable(parent has to be last block)
 	
 3) finally block
 	- Optional block can be written with "try".
 	- This is special block which gets executed in both cases a) exception occurs b) No exception.
-	- Genearlly cleanup code is written in this block. e.g. DB close connection, closing socket.
+	- Genearlly cleanup code is written in this block. e.g. DB close connection, closing socket, closing file.
 	- If System.exit(0) is encountered before reaching finally block, then finally will NOT be executed.
 	
 4) "throw" keyword:
@@ -994,29 +996,187 @@ Exceptions can be handled using "try-catch" block.
 	- Compiler would mandate to handle exception mentioned with "throws", if those exceptions are "Checked" exceptions.
 
 
+	- Which Role? Developer, QA Testing, Automation, Customer Support
+	- Which Programming Language?	
+		Java, Python, PHP, C, C++, Go, JavaScript
+	- Web Devloper, Mobile Application Developer, Server side, Any Development
+	- Basic programming?
+		for loop, if, funciton, return type, array, string
+		logic development 
+				******
+				****
+				**
+				*
+		GeeksForGeeks  
+		Leetcode
+	- SQL Queries (Database)
+	- Basic OS concepts
+	- Networking 
+	- Project (FreeLancing, OpenSource)
 
 
+**RuntimeException examples:**
+	
+			// Example of NPE
+			String s = null;
+			System.out.println(s.length());
+
+			// Example of ArithmeticException
+			int a = 8 , b = 0;
+			System.out.println(a/b);// Divide by zero
+		
+		
+			//StringIndexOutOfBoundsException
+			String s = "pga";
+			System.out.println(s.charAt(10));
+		
+		
+			// NumberFormatException
+			String s1 = "ten";
+			Integer.parseInt(s1);
+
+**Exception classes hierarchy:**
+
+- Throwable is parent of all exception classes.
+- Exception and Error are two immediate children of Throwable.
+- RuntimeException is child class Exception class.
+
+**Types of exceptions:**
+a) Checked Exceptions
+b) Unchecked Exceptions
+
+Checked Exceptions
+
+- All exceptions which directly inherits "Exception" class are called as Checked Exceptions.
+- Compiler mandates/forces to handle these exceptions.
+- Genearlly user-defined exceptions are written as Checked exceptions.
+	  e.g. class AgeInvalidException extends Exception {}
+- More critical than unchecked exceptions.
+- Ex. of Checked exceptions - IOException, SQLException, InterruptedException, ServletException, FileNotFoundException
+
+Unchecked exceptions:
+
+- Parent is "RuntimeException"
+- Not mandatory to handle these exception. Compiler does NOT enforce.
+- Less critical
+- It mostly occurs due to user mistake.
+- Ex. ArithmeticException, ArrayIndexOutOfBoundsException, NullPointerException, NumberFormatException, StringIndexOutOfBoundsException
+
+Error exceptions:
+
+- Exceptions which comes under "Error" class.
+- Most critical 
+- It's difficult to recover from these exceptions.
+- e.g. StackOverflowError, OutOfMemoryErroy, VirtualMachineError
 
 
+Exception Propogration:
+
+- Whenever exception occurs JVM checks for catch block in same function. If that function has not handled an exception then exception goes to a function who has called the current function.
 
 
+Example:
+		JVM -> main() -> f1() -> f2()
+		
+		public class ExceptionPropogation {
+			public static void main(String[] args) {
+				System.out.println("main:start");
+				f1();
+				System.out.println("main:end");
+			}
+	
+			static void f1() {
+				System.out.println("f1:start");
+				try {
+					f2();
+				}catch(ArithmeticException e1) {
+					System.out.println("Exception occurred..");
+				}
+				System.out.println("f1:end");
+			}
+	
+			static void f2() {
+				System.out.println("f2:start");
+				System.out.println(8/0);
+				System.out.println("f2:end");
+			}
+		}
+		**Output**
+		main:start
+		f1:start
+		f2:start
+		Exception occurred..
+		f1:end
+		main:end
 
+**try-catch-finally netsting:**
 
+	fun() {
+		...
+		
+		try {
+			...
+			try {
+				...
+				}catch() {}
+				finally {}
+			....
+		}catch(Exception e) {}
+		finally{ }
+	
+	}
 
+**Example of Checked Exception:**
+	import java.io.*;
 
+	public class CheckedExceptionDemo {
+		public static void main(String[] args) {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Enter name: ");
+			try {
+				String name = br.readLine();// compiler gives error if IOException is not handled
+				System.out.println("Your name is: " + name);
+				}catch(IOException e) {}
+			}
+		}
+	}
 
+**How to define user-defined exception class?**
 
+We can define user defined exception class by inheriting "Exception" class (Because then only that exception becomes Checked exception)
 
+		import java.util.Scanner;
 
+		// User Defined exception
+		class AgeInvalidException extends Exception {}
 
+		public class UserDefinedExceptionDemo {
+			public static void main(String[] args) {
+				Scanner sc = new Scanner(System.in);
+				System.out.println("Enter age: ");
+				int age = sc.nextInt();
+				try {
+					validateAge(age);
+				}catch(AgeInvalidException e) {
+					System.out.println("Age is invalid. It should be between 1-100");
+					System.exit(0);
+				}
+				System.out.println("Age is Valid");
+			}
+	
+			static void validateAge(int age) throws AgeInvalidException {
+				if (age < 1 || age > 100) {
+					throw new AgeInvalidException();
+				}
+			}
+		}
 
-
-
-
-
-
-
-
+**Combining multiple exceptions using one catch block:**
+		try {
+			
+		}catch(ArithmeticException | NullPointerException | ArrayIndexOutOfBoundsException e) {
+			System.out.println("Exception occurred");
+		}
 
 
 
