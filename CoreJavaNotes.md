@@ -1178,6 +1178,124 @@ We can define user defined exception class by inheriting "Exception" class (Beca
 			System.out.println("Exception occurred");
 		}
 
+--------------------------------------
+MultiThreading
+--------------------------------------
+
+What is program?
+ - Application which is stored in secondary storage(HDD).
+ 
+What is Process?
+ - When we execute program, OS creates process. Process gets loaded in primary storage(RAM.)
+ 
+Who does execution of process?
+ - Instructions of process are executed by CPU one by one. CPU can execute only ONE instrcution at a time.
+ 
+Execution speed of CPU is so fast, in 1 ms it can execute 1000 of instructions(Based on speed of CPU).
+
+Multi-Tasking:
+ All OS now days are multi-tasking. We can run multiple applications at a time. As execution speed of CPU is so fast, we feel multiple apps are running in parallel.
+ 
+Multi-Threading:
+ - When we have multiples tasks of one process which can run in parellel, we can use Multi-threading.
+ 
+Thread:
+	- Thread is a lighweight process.
+	- It is part of a process which has dedicated job to perform.
+	- Thread gets dedicated memory. It shares memory given to the process.
+	
+If two tasks are dependent on each other we can handle them using one thread only.(We don't need multi-threading)
+
+**Example of Multi-threading:**
+For Browser application we can have threads to do following tasks:
+ 
+ - Downloading
+ - Browsing
+ - Printing
+ - Streaming
+ 
+Every Java application is by default single threaded. "main" is default thread which gets created for each java application.
+
+
+When we run multiple threads of one process in parallel, we can NOT control order of their execution. It's all decided by scheduler.
+
+
+How to get information about current thread?
+
+    Thread t = Thread.currentThread();
+	System.out.println("This is executed by thread:" + t.getName());
+
+
+**How to define Threads in Java?**
+
+ There are 2 ways of defining threads in Java.
+ 1) Using "extends" Thread" class
+ 2) Using "implments Runnable" interface
+ 
+Why two options are there?
+ If your class is already inheriting another class and you have to define threading behavior for that class then we can not extend Thread class (As multiple inheritance is not supported). In this case you would go with interface "Runnable".
+ 
+In both options we have to defing following method in thread class.
+	
+		public void run() {
+			....
+		}
+
+run() method is abstract method from Runnable interface.
+
+How to start a therad?
+
+	We have to call start() method of Thread class to start the thread.
+	start() method takes care of allocation required resources to a thread(e.g. Memory, stack) and once resource allocation is done,
+	start() method would call run() method.
+	
+What if we call run() method directly instead of start()?
+	 No compilation error, but new thread will NOT be created. It will get executed on "main" thread.
+
+
+What is relationship between Thread and Runnable interface?
+ Thread class inherits Runnable interface.
+ 	
+	class Thread implements Runnable {
+		public void run () { }
+	}
+
+**Inter-Thread communication:**
+
+ In multi-threading at times we require communication between threads due to dependency.
+ There are 2 types of dependencies:
+ 
+ 	1) You are blocked for complete execution of another thread - Use join() method.
+	2) You are blocked for some part of other thread's execution. Whenever required part is done other thread would notify you.
+	   This is Producer-consumer thread communication. 
+	   Use - wait()-notify()/notifyAll() methods.
+
+join() method:
+ 
+ Current thread waits for **complete** execution of a thread on which join() method is called. This is method from Thread class.
+
+e.g.
+		Thread t1 = new Thread();
+		t1.start();
+		t1.join();
+
+	Here main thread(current thread) will resume the execution only when t1 is fully executed.
+
+
+wait()/notify()/notifyAll():
+
+  - These are methods from Object class.
+  - Used for inter-thread communication.
+  - Waiting thread(consumer) will call wait() method, Notifying thread(Producer) will call notify() method.
+  - All these methods must be called in "synchronized" block.
+  - These methods would work as expected only if those are invoked on SAME object.
+  - To achieve inter-thread communication with these methods, we have to create one common object and pass that same object to both producer and consumer.
+ 
+ 	Object obj1 = new Object();
+	
+	If two threads calls obj1.wait() and if another thread calls obj1.notify() -> Notification will go to only one thread.
+	 If we have to notify all waiting threads on "obj1" thne we have to call "obj1.notifyAll()"
+
 
 
 
