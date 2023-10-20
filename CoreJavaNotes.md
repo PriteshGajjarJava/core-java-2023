@@ -1,4 +1,5 @@
-										**Core Java Notes**
+**Core Java Notes
+**
 										
 - 	OOP language
 - 	Latest version is v20
@@ -82,10 +83,12 @@ In one file you can declare only one public class.
 -------------------------------
 JDK v/s JRE v/s JVM
 
-----
+-------------------------------
+
 	JDK	: Java Deveopment Kit
 	JRE : Java Runtime Environment
 	JVM : Java Virtual Machine
+
 ------------------------------------------------------------
 
 Source code(.java) -> javac -> Byte Code (.class) -> JVM -> m/c code -> o/p
@@ -198,21 +201,23 @@ What is an object?
 - Object is an instance of a class.
 - To create object of a class we use "new" operator.
 e.g.
+
 	`Employee e = new Employee();`
 	`Person p = new Person("James", 2001-9-8, 49); // name, birthDate, weight`
 
 -----------------------------------------------------------------------
 Types of relationship?
 -----------------------------------------------------------------------
+
 a) IS-A relationship (Inheritance)
 b) HAS-A relationsip (Association/Composition/Aggregation)
 composition is stronger than Aggregation
 
-Inheritance example: (______)
+Inheritance example:
 - Employee IS-A Person
 - Student IS-A Person
 
-Composition example: (--------)
+Composition example:
 - Car HAS-A Engine - Composition (Strong relationship)
 - Person HAS-A Address (Aggregation)
 - College HAS-A Departments
@@ -279,10 +284,12 @@ Example:
     			int y = 20;
     		}
     	}	
+
 On stack: 
-		| 		x=10			 				  	|
+
+		| 		x=10			 		|
 		|		obj = memory-address	|
-	    |-------------------------------  |
+	    |---------STACK---------------  |
 
 --------------------------------
 Pass by mechanism
@@ -315,15 +322,15 @@ Primitive types (in-built data typs)
 -----------------------------------------------------------------------
 There are total 8 primitive types in Java.
 
-	|**Data Type**  |	** Size** |** Wrapper class** | Default value
-	|byte			|	1 byte	  | Byte			  | 0
-	|short			|	2 bytes	  | Short			  | 0	
-	|int			|	4 bytes	  | Integer			  | 0
-	|long			|	8 bytes	  | Long			  |	0
-	|char			|	2 bytes	  | Character		  | '' 	
-	|float			|	4 bytes	  | Float			  | 0.0
-	|double			|	8 bytes	  | Double			  | 0.0
-	|boolean		|	1 bit	  | Boolean			  | false	
+	|**Data Type**  |	** Size** |** Wrapper class** 	| Default value
+	|byte			|	1 byte	  | Byte			  	| 0
+	|short			|	2 bytes	  | Short			  	| 0	
+	|int			|	4 bytes	  | Integer			  	| 0
+	|long			|	8 bytes	  | Long			  	|	0
+	|char			|	2 bytes	  | Character		  	| '' 	
+	|float			|	4 bytes	  | Float			  	| 0.0
+	|double			|	8 bytes	  | Double			  	| 0.0
+	|boolean		|	1 bit	  | Boolean			  	| false	
 
 There is no "unsigned" type in Java. As its there in C/C++ for storing address of variable(pointer).
 Each data type in Java has corresponding wrapper class.
@@ -471,9 +478,11 @@ Var-arg list
 	This is called as immutability.
 	
 	All string functions which updates string value (e.g. toUpperCase()) returns new string.
+
+
 	
 	**String Functions:**
-	
+
 	- Case converstion : toUpperCase(), toLowerCase()
 	- concat() : 
 		String s1 ="abc";
