@@ -1305,6 +1305,208 @@ wait()/notify()/notifyAll():
 	If two threads calls obj1.wait() and if another thread calls obj1.notify() -> Notification will go to only one thread.
 	 If we have to notify all waiting threads on "obj1" thne we have to call "obj1.notifyAll()"
 
+-------------------------
+Synchronization
+-----------------------------------------
+
+ - Synchronization is mechanism of controlling concurrent execution of threads.
+ - It helps to restrict multiple threads from making changes to critical information at the same time.
+
+**Example:
+**
+	In Banking application, we want to allow parallel operations like Deposit, Withdrawl, Check Balance etc.
+	However if these operations are happening on same account then there are high chances of error scenarios,
+	so we have to retrict paraellel operations on same account object.
+	
+	Here we can use "Synchronizaton".
+	
+ - Where to apply "synchronized" keyword?
+ 	It can be applied at method/block level. (Synchronized method or Synchronized block)
+	
+	e.g.
+		synchronized void withdrawl() {
+			....
+		}
+		
+		OR
+		
+		void withdrawl() {
+		 	...
+			// critical operation starts
+			synchronized(obj) {
+			 ....
+			}
+			// critical operaiton ends
+			....
+		}
+ 
+We achieve "**Thread Safety**" with the help of Synchronization.
+
+  - Is it good idea to make all methods synchrnoized?
+  	 NO. Making synchronized method would slow down execution. 
+	 
+	 Methods which are updating(write operations) critical information MUST be synchronized.
+	 In our example - checkBalance() method need not to be synchronized (as it's Read Operation)
+
+  - How Java achieves synchronization?
+  	 It uses Object level locking for synchronized methods/block.
+
+ 
+  - Can two threads doing two operations on different objects would have any problem due to "synchronization"?
+  	No. If two threads are performing critical operations on two different objects they can do in parallel as it's safe becanuse updates are happening on two different objects.
+
+  - Which methods we can make "synchronized"?
+  	Both instance and static methods can be declared as "synchronized".
+	
+For instance methods Java usese "Object level locking".
+For static methods Java uses "Class level locking".
+
+
+**Object Level locking:**
+
+- To enter into "synchronized" method, JVM checks if there is already critical operation going on that object.
+  If there is no any critical operatoin going, JVM would allow thread to enter into synchronized method by asking
+  thread to apply it's lock on that object.
+  
+- It's important to acquire lock before getting into synchronized method/block.
+
+- If lock is already applied, then thread has to wait.
+
+- Only one thread can aquire lock on one object.
+
+Example:
+
+	Account a1 = new Account(119, 10000); // actNo=119, bal=10000
+	Account a2 = new Account(313, 18000);
+	
+	Thread t1 = new Thread(a1, "Withdrawl");  t1.start();
+		- To perform withdrwal operation on "a1", thread "t1" applies lock on obj "a1".
+	
+	Thread t2 = new Thread(a1, "Deposit"); t2.start();
+		- To perform this operation JVM needs to aquire lock on "a1".
+		- JVM would check lock on "a1". There is already lock on "a1" by "t1", so here "t2" has to wait.
+		
+	Thread t3 = new Thread(a2, "Deposit"); t3.start();
+		- To perform this operation lock on "a2" is needed.
+		- "a2" is free, JVM will apply lock of "t3" on "a2".
+		
+- When lock is needed? 
+  To execute synchronized block/method.
+  
+- On what lock is applied?
+  Object
+  
+- Who applies lock?
+  Thread
+
+- What happens to thread if lock is already applied?
+  Thread has to wait.
+  
+- How many locks can be applied to one object?
+  Only one lock can be applied to one object.
+
+
+**Class Level Locking:
+**
+
+  - We can apply "synchronized" keyword to static methods as well.
+  - To execute "static synchronized" method, JVM needs lock at class level. (Class level locking)
+  - Thread will acquire lock on class and executes static synchrnoized method.
+  - **IMP** - There is NO relation between object level locking and class level locking. Both are independent.
+  - If lock is applied at class level, another thread can execute instance synchrnoized method in parallel.
+
+
+		class Account {
+	
+			// instance methods
+			synchronized void withdrawl() {}
+			synchronized void deposit() {}
+	
+			// static methods
+			synchrnoized static changeBankAddress() {}
+			synchronized static changeIFSCCode() {}
+	
+			void f1()  {}
+			static void f2() {}
+		}
+
+
+	T1 -> Account.changeBankAddress(); // allowed
+	T2 -> act1.withdrawl(1000); // allowed
+	T3 -> act2.deposit(2000);// allowed
+	T4 -> Account.changeIFSCCode() ; // NOT allowed
+	T5 -> act2.deposit(5000);// NOT allowed
+	T6 -> act1.f1(); // Allowed
+	T7 -> act1.f1(); // Allowed
+	T8 -> Account.f2(); // Allowed
+	T9 -> Account.f2(); // Allowed
+	T10 -> Abc.xyz(); // Allowed
+
+
+----------------------------------
+Collection
+--------------------------------------------------
+
+- Collection is nothing but data structures.
+- We use collection to store multiple elements.
+- Array is also one of the collection which is static in nature(We have to define size of an array upfront)
+- JDK offers in-built classes for all data structures.
+- All collection classes are stored in "java.util" package.
+- All collections are dynamic. We don't require size for any collection.
+- At high level following are collections:
+
+List 	-	Index based collection. Ordered.
+Set 	- 	Duplicates NOT allowed(unique data). UnOrdered.
+Map		-	Key-Value pair.
+Stack 	-	LIFO - Last In First Out (Used by OS heavily).e.g Funcation call stack, Expression with parenthesis
+Queue	- 	FIFO - Fast In First Out
+
+
+List:
+	Vector - Synchronized (legacy)
+	ArrayList - Not synchronized
+	LinkedList - When frequent update(insert), Delete
+
+Set 
+	HashSet - Faster, Unordered
+	LinkedHashSet - Ordered
+	TreeSet - Sorted
+	
+Map
+	Hashtable - synchronized (legacy)
+	HashMap - Faster, unordered
+	LinkedHashMap - Ordered by key
+	TreeMap - Sorted by key
+	
+
+**List Example:**
+	
+		List<Integer> list = new ArrayList<Integer>(); // list of integers
+		List<String> cities = new ArrayList<String>(); // list of strings
+		
+		// add
+		list.add(element);
+		
+		// get
+		list.get(index);
+		
+		// remove
+		list.remove(index);
+		
+		// Search
+		list.contains(element);//true/false
+		
+		// Size
+		list.size();//length of list
+	
+		// Traverse
+		1) for-each loop
+			for (Integer i : list) { sop(i); }
+		2) Using iterator
+			Iterator<Integer> it = list.iterator();
+			while(it.hasNext()) {
+				sop(it.next());
+			}
 
 
 

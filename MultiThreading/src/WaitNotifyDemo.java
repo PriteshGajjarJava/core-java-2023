@@ -50,15 +50,5 @@ public class WaitNotifyDemo {
 		Object obj = new Object();
 		new ColoringThread(obj).start();
 		new ProductionThread(obj).start();
-
 	}
 }
-
-
-
-
-
-
-
-
-
