@@ -1508,10 +1508,69 @@ Map
 				sop(it.next());
 			}
 
+**equals() and hashCode() method:**
 
+- These are methods from Object class.
+- We MUST override these methods in custom class which is used in Collection.
+- JVM compares two object by executing following steps.
+	1) Derives hashCode() of both objects.
+	2) If hashCode() is different -> It ignore comparision and returns false.
+	3) If hashCode() is SAME -> It invokes equals() method and double confirm.
+- In hashCode() method we write hash function using data of an object.
 
+		import java.util.*;
+		class Emp {
+			int empId;
+			String name;
+	
+			Emp(int empId, String name) {
+				this.empId = empId;
+				this.name = name;
+			}
+	
+			public String toString() {
+				return "{" + this.empId + ", " + this.name + "}";
+			}
+	
+			public int hashCode() {
+				// Hash function
+				return this.empId * name.length();
+			}
+	
+			public boolean equals(Object obj) {
+				Emp e1 = this;
+				Emp e2 = (Emp)obj;
+				return e1.empId == e2.empId && e1.name.equals(e2.name);
+			}
+		}
 
+		public class CustomSet {
+			public static void main(String[] args) {
+				Set<Emp> set = new HashSet<Emp>();
+				Emp e1 = new Emp(11, "Fred"); // 11 * 4 = 44
+				Emp e2 = new Emp(12, "Rob");  // 12 * 3 = 36
+				Emp e3 = new Emp(11, "Fred"); // 11 * 4 = 44
+				Emp e4 = new Emp(22, "Om"); // 22 * 2 = 44
+				set.add(e1);
+				set.add(e2);
+				set.add(e3);
+				set.add(e4);
+				System.out.println(set);
+			}
+		}
 
+**How to sort List in Java?**
+Use Collections.sort() method.
+
+If your list is of custom type (e.g. Emp) then you have to define comparision logic required for sorting in one of the following ways.
+1) implements "Comparable" => Only one sorting logic can be defined
+2) Writing seperate class which inherits "Comparator<T>" interface. -> Using this mechansim we can write multiple sorting logics.
+	
+e.g.
+		
+		Collections.sort(list, new SalaryCompartor());
+
+	
 	
 	
 	
