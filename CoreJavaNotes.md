@@ -1570,7 +1570,15 @@ e.g.
 		
 		Collections.sort(list, new SalaryCompartor());
 
+**Stack And Queue**
 	
+	Stack<Integer> stack = new Stack<Integer>();
+	stack.push(8);
+	stack.pop();
+	
+	Queue<Integer> queue = new LinkedList<Integer>();
+	queue.add(99);
+	queue.remove();
 	
 	
 	
